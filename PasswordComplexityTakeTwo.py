@@ -1,45 +1,42 @@
 #this program is about passowrd complexity. its for mr barrow
-#import
-from string import ascii_letters, digits, ascii_lowercase, ascii_uppercase
+#importing
+from string import ascii_letters, digits, ascii_lowercase, ascii_uppercase, punctuation
 
+# Define a function to check password complexity
+def checks(password):
+    hasupper = False
+    haslower = False
+    hasspecial = False
+    hasnumber = False
 
-#defining variables
-hasupper = False
-haslower = False
-hasspecial = False
-lengthcheck = False
-hasnumber = False
-
-#making the password
-password = input("please input your password")
-
-#these check the string library for whether it has an intersection of the desired character set and the character set in the password
-def checks():
-
-    if set(password).difference(ascii_letters + digits):
+    # Check if the password has any special characters
+    if set(password).difference(ascii_letters + digits) & set(punctuation):
         hasspecial = True
-    else:
-        hasspecial = False
 
+    # Check if the password has any lowercase letters
     if set(password).intersection(ascii_lowercase):
         haslower = True
-    else:
-        haslower = False
 
+    # Check if the password has any uppercase letters
     if set(password).intersection(ascii_uppercase):
         hasupper = True
-    else:
-        hasupper = False
 
+    # Check if the password has any digits
     if set(password).intersection(digits):
         hasnumber = True
+
+    return hasupper, haslower, hasspecial, hasnumber
+
+# Prompt user to input their password
+password = input("Please input your password: ")
+
+# Continue prompting the user until the password meets the complexity requirements
+while len(password) < 15:
+    hasupper, haslower, hasspecial, hasnumber = checks(password)
+    if not (hasupper and haslower and hasspecial and hasnumber):
+        print("Password is not complex enough. Please make sure it contains: \n at least one upper case character, \n at least one lower case character, \n at least one number, \n at least one special character, \n and is at least fifteen characters in length.")
+        password = input("Please input your password: ")
     else:
-        hasnumber = False
+        break
 
-checks()
-
-while len(password) < 15 or hasupper == False or haslower == False or hasspecial == False or hasnumber == False:
-    password = input("please input your password")
-    checks()
-
-print("password set successfully")
+print("Password set successfully")
