@@ -14,7 +14,7 @@ password = input("what is your desired password?")
 uppers = [l for l in password if ord(l) >= 65 and ord(l) <= 90] 
 lowers = [l for l in password if ord(l) >= 97 and ord(l) <= 122]
 while int(len(password)) < 15:
-    input("Password too short, please input a new password")
+    passoword = input("Password too short, please input a new password")
     uppers = [l for l in password if l.isupper()]
     lowers = [l for l in password if l.islower()]
     print(uppers)
