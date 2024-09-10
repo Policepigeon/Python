@@ -14,30 +14,8 @@ hasnumber = False
 password = input("please input your password")
 
 #these check the string library for whether it has an intersection of the desired character set and the character set in the password
-if set(password).difference(ascii_letters + digits):
-    hasspecial = True
-else:
-    hasspecial = False
+def checks():
 
-if set(password).intersection(ascii_lowercase):
-    haslower = True
-else:
-    haslower = False
-
-if set(password).intersection(ascii_uppercase):
-    hasupper = True
-else:
-    hasupper = False
-
-if set(password).intersection(digits):
-    hasnumber = True
-else:
-    hasnumber = False
-
-while len(password) < 15 or hasupper == False or haslower == False or hasspecial == False or hasnumber == False:
-    password = input("please input your password")
-
-    #these check the string library for whether it has an intersection of the desired character set and the character set in the password
     if set(password).difference(ascii_letters + digits):
         hasspecial = True
     else:
@@ -52,23 +30,14 @@ while len(password) < 15 or hasupper == False or haslower == False or hasspecial
         hasupper = True
     else:
         hasupper = False
-    #these check the string library for whether it has an intersection of the desired character set and the character set in the password
-    if set(password).difference(ascii_letters + digits):
-        hasspecial = True
-    else:
-        hasspecial = False
-
-    if set(password).intersection(ascii_lowercase):
-        haslower = True
-    else:
-        haslower = Falsepassword = input("please input your password")
 
     if set(password).intersection(digits):
         hasnumber = True
     else:
         hasnumber = False
 
-    if set(password).intersection(ascii_uppercase):
-        hasupper = True
-    else:
-        hasupper = Falsepassword = input("please input your password")
+checks()
+
+while len(password) < 15 or hasupper == False or haslower == False or hasspecial == False or hasnumber == False:
+    password = input("please input your password")
+    checks(password)
