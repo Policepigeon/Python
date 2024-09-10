@@ -40,4 +40,6 @@ checks()
 
 while len(password) < 15 or hasupper == False or haslower == False or hasspecial == False or hasnumber == False:
     password = input("please input your password")
-    checks(password)
+    checks()
+
+print("password set successfully")
