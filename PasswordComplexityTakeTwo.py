@@ -1,7 +1,12 @@
 #this program is about passowrd complexity. its for mr barrow
 #importing
 from string import ascii_letters, digits, ascii_lowercase, ascii_uppercase, punctuation
+import getpass
 
+
+# testing what getpass does
+shrersh = getpass.getpass()
+print(shrersh)
 # Define a function to check password complexity
 def checks(password):
     hasupper = False
