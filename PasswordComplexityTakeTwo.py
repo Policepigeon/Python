@@ -2,31 +2,8 @@
 #importing
 from string import ascii_letters, digits, ascii_lowercase, ascii_uppercase, punctuation
 import random 
-# This bit tries to use python's getch library to make the asterisks show when you are typing, however if you are on an unsupported platform, then it should import getpass() instead for support, you just don't get the asterisks
-try:
-    from getch import getch
-    def getpass(prompt):
-        """Replacement for getpass.getpass() which prints asterisks for each character typed"""
-        print(prompt, end='', flush=True)
-        buf = b''
-        while True:
-            ch = getch().encode()
-            if ch in {b'\n', b'\r', b'\r\n'}:
-                print('')
-                break
-            elif ch == b'\x03': # Ctrl+C
-                # raise KeyboardInterrupt
-                return ''
-            elif ch in {b'\x08', b'\x7f'}: # Backspace
-                buf = buf[:-1]
-                print(f'\r{(len(prompt)+len(buf)+1)*" "}\r{prompt}{"*" * len(buf)}', end='', flush=True)
-            else:
-                buf += ch
-                print('*', end='', flush=True)
-
-        return buf.decode(encoding='utf-8')
-except ImportError:
-    from getpass import getpass
+#pip install pwinput MUST BE USED HERE
+import pwinput
 
 
 # Define a function to check password complexity
@@ -55,8 +32,8 @@ def checks(password, password2):
 
 # Prompt user to input their password
 while True:
-    password = getpass("Please enter a password (minimum 15 characters): ")
-    password2 = getpass("Please confirm the password")
+    password = pwinput.pwinput("Please enter a password (minimum 15 characters): ")
+    password2 = pwinput.pwinput("Please confirm the password")
 
     # Check password criteria
     hasupper, haslower, hasspecial, hasnumber, confirmed = checks(password, password2)
@@ -74,4 +51,34 @@ print("Password set successfully")
 
 ## lets see if i can hash the password and store it to a text file
 
-key = random.randint(1115792089237316195423570985008687907853269984665640564039457584007913129639936)
+key = int(random.randint(0,1115792089237316195423570985008687907853269984665640564039457584007913129639936))
+passlist = password.split()
+
+#gets the ascii values for the characters stored in list passlist
+asc = []
+for j in passlist:
+    asc.extend(ord(num) for num in j)
+ 
+# printing result
+print("The ascii list is : " + str(asc))
+
+for i in range(len(asc)):
+    asc[i]= int(asc[i]) * key
+    print(asc[i])
+    asc[i]= str(asc[i])
+
+print(asc)
+print(key)
+
+
+asc_str = ', '.join(asc)
+
+
+with open("passwordfile.txt", "a") as passwordfile:
+    passwordfile.write(asc_str + "\n")
+
+with open("keyfile.txt", "a") as keyfile:
+    keyfile.write(str(key) + "\n")
+
+keyfile.close
+passwordfile.close
