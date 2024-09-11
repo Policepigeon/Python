@@ -1,63 +1,47 @@
-#this program is about passowrd complexity. its for mr barrow
+#this is a nightmare. it is for mr barrow
 #importing
 from string import ascii_letters, digits, ascii_lowercase, ascii_uppercase, punctuation
 import getpass
 
-
 # Define a function to check password complexity
 def checks(password, password2):
-    hasupper = False
-    haslower = False
-    hasspecial = False
-    hasnumber = False
-    confirmed = False
-
-    # Check if the password has any special characters
-    if set(password).difference(ascii_letters + digits) or set(password).intersection(punctuation) == True:
-        hasspecial = True
-        print("specials ok")
-    # Check if the password has any lowercase letters
-    if set(password).intersection(ascii_lowercase) == True:
-        haslower = True
-        print("lowers ok")
-    # Check if the password has any uppercase letters
-    if set(password).intersection(ascii_uppercase) == True:
-        hasupper = True
-        print("uppers ok")
-    # Check if the password has any digits
-    if set(password).intersection(digits) == True:
-        hasnumber = True
-        print("numbers ok")
-    if password == password2:
-        print("confirmed ok")
-        confirmed = True
+    hasupper = any(char in ascii_uppercase for char in password)
+    haslower = any(char in ascii_lowercase for char in password)
+    hasspecial = any(char in punctuation for char in password)
+    hasnumber = any(char in digits for char in password)
+    confirmed = (password == password2)
+    
+    # Print status of each check
+    if hasspecial:
+        print("Special characters: OK")
+    if haslower:
+        print("Lowercase letters: OK")
+    if hasupper:
+        print("Uppercase letters: OK")
+    if hasnumber:
+        print("Numbers: OK")
+    if confirmed:
+        print("Passwords: OK")
     else:
-        print("passwords are not the same")
+        print("Passwords do not match")
+    
     return hasupper, haslower, hasspecial, hasnumber, confirmed
 
 # Prompt user to input their password
-password = getpass.getpass("Please enter a password")
-password2 = getpass.getpass("Please confirm the password")
-checks(password, password2)
+while True:
+    password = getpass.getpass("Please enter a password (minimum 15 characters): ")
+    password2 = getpass.getpass("Please confirm the password")
 
-hasupper, haslower, hasspecial, hasnumber, confirmed = checks(password, password2)
-if not (hasupper and haslower and hasspecial and hasnumber):
-        print("Password is not complex enough. Please make sure it contains: \n at least one upper case character, \n at least one lower case character, \n at least one number, \n at least one special character, \n and is at least fifteen characters in length.")
-        password = getpass.getpass("Please enter an amended password")
-        password2 = getpass.getpass("Please confirm the password")
-
-
-# Continue prompting the user until the password meets the complexity requirements
-while len(password) < 15:
-    checks(password, password2)
+    # Check password criteria
     hasupper, haslower, hasspecial, hasnumber, confirmed = checks(password, password2)
-    if not (hasupper and haslower and hasspecial and hasnumber):
-        print("Password is not complex enough. Please make sure it contains: \n at least one upper case character, \n at least one lower case character, \n at least one number, \n at least one special character, \n and is at least fifteen characters in length.")
-        password = getpass.getpass("Please enter an amended password")
-        password2 = getpass.getpass("Please confirm the password")
 
+    # Length check and complexity check
+    if len(password) < 15:
+        print("Password is too short. It must be at least 15 characters long.")
+    elif not (hasupper and haslower and hasspecial and hasnumber and confirmed):
+        print("Password does not meet all the complexity requirements.")
+        print("Please make sure it contains: \n - at least one upper case character, \n - at least one lower case character, \n - at least one number, \n - at least one special character.")
     else:
         break
 
 print("Password set successfully")
-
