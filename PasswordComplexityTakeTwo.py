@@ -13,22 +13,23 @@ def checks(password, password2):
     confirmed = False
 
     # Check if the password has any special characters
-    if set(password).difference(ascii_letters + digits) & set(punctuation):
+    if set(password).difference(ascii_letters + digits) or set(password).intersection(punctuation) == True:
         hasspecial = True
-
+        print("specials ok")
     # Check if the password has any lowercase letters
-    if set(password).intersection(ascii_lowercase):
+    if set(password).intersection(ascii_lowercase) == True:
         haslower = True
-
+        print("lowers ok")
     # Check if the password has any uppercase letters
-    if set(password).intersection(ascii_uppercase):
+    if set(password).intersection(ascii_uppercase) == True:
         hasupper = True
-
+        print("uppers ok")
     # Check if the password has any digits
-    if set(password).intersection(digits):
+    if set(password).intersection(digits) == True:
         hasnumber = True
-
+        print("numbers ok")
     if password == password2:
+        print("confirmed ok")
         confirmed = True
     else:
         print("passwords are not the same")
@@ -37,8 +38,18 @@ def checks(password, password2):
 # Prompt user to input their password
 password = getpass.getpass("Please enter a password")
 password2 = getpass.getpass("Please confirm the password")
+checks(password, password2)
+
+hasupper, haslower, hasspecial, hasnumber, confirmed = checks(password, password2)
+if not (hasupper and haslower and hasspecial and hasnumber):
+        print("Password is not complex enough. Please make sure it contains: \n at least one upper case character, \n at least one lower case character, \n at least one number, \n at least one special character, \n and is at least fifteen characters in length.")
+        password = getpass.getpass("Please enter an amended password")
+        password2 = getpass.getpass("Please confirm the password")
+
+
 # Continue prompting the user until the password meets the complexity requirements
 while len(password) < 15:
+    checks(password, password2)
     hasupper, haslower, hasspecial, hasnumber, confirmed = checks(password, password2)
     if not (hasupper and haslower and hasspecial and hasnumber):
         print("Password is not complex enough. Please make sure it contains: \n at least one upper case character, \n at least one lower case character, \n at least one number, \n at least one special character, \n and is at least fifteen characters in length.")
