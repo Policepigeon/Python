@@ -2,14 +2,16 @@
 #importing
 from string import ascii_letters, digits, ascii_lowercase, ascii_uppercase, punctuation
 import random 
-import tkinter
+from tkinter import *
 #pip install pwinput MUST BE USED HERE
 import pwinput
 
 
-m = tkinter.Tk()
-'''
-widget = Entry(parent, show="*", width=15)'''
+master = Tk()
+Label(master, text='Password').grid(row=0)
+e1 = Entry(master)
+e1.grid(row=0, column=1)
+widget = Entry(Label, show="*", width=15)
 m.mainloop()
 
 
