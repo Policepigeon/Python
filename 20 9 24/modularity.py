@@ -6,7 +6,9 @@ def pir(radius):
     return pir
 
 #now calculate radius
+
 radius = float(input("please input radius"))
+pir(radius)
 area = pir * radius
 circumference = pir * 2
 print("area:", area)
