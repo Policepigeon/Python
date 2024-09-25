@@ -1,0 +1,7 @@
+#comitting war crimes for jasper erwes
+
+create|fname|1;
+create|lname|hello world;
+add|#fname,#0.9|fname;
+join|#fname|#lname|out;
+log|#out;
