@@ -2,17 +2,19 @@
 #importing
 from string import ascii_letters, digits, ascii_lowercase, ascii_uppercase, punctuation
 import random 
-from tkinter import *
+import tkinter as tk
+from tkinter import messagebox
 #pip install pwinput MUST BE USED HERE
 import pwinput
 
 
-master = Tk()
-Label(master, text='Password').grid(row=0)
-e1 = Entry(master)
-e1.grid(row=0, column=1)
-widget = Entry(Label, show="*", width=15)
-m.mainloop()
+root = tk.Tk()
+root.withdraw() # hide the window
+
+entry = tk.Entry(root, show="*", width=15)
+entry.pack() # pack it in the root window
+
+root.mainloop()
 
 
 
