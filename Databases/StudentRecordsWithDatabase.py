@@ -8,7 +8,7 @@ cur = con.cursor()
 
 class Student:
   #the basic student class
-    def __init__(self, name, house, lastgrade, prefername, dbirth, schoolclass, detention, lastname ):
+    def __init__(self, name, house, lastgrade, prefername, dbirth, schoolclass, detention, lastname, studentid ):
         self.name = name
         self.house = house
         self.lastgrade = lastgrade
@@ -17,6 +17,7 @@ class Student:
         self.schoolclass = schoolclass
         self.detention = detention
         self.lastname = lastname
+        self.studentid = studentid
 
 #now i spend my days creating getters and setters
 
@@ -33,7 +34,7 @@ class Student:
 andy = Student("andrew", "evans", "9", "andy", "17 9 24", "12F", "False", "crawford")
 #taking the input for the student
 student = input("what is the student's name?")
-student = Student(student, input("\n What is the student's house?"), input("\n What is the student's last grade?"), input("\n What is the student's preferred name?"), )
+student = Student(student, input("\n What is the student's house?"), input("\n What is the student's last grade?"), input("\n What is the student's preferred name?"), input("\n What is the student's date of birth?"), input("\n Which class is the student in?"), input("\n The student has a detention. True or False"), input("\n What is the student's surname?"), input("\n What is the student's student id?") )
 print(andy.prefername)
 
 #Allows the user to input their desired query, for example a search for users. do input sanitation later.
