@@ -33,7 +33,7 @@ class Student:
 andy = Student("andrew", "evans", "9", "andy", "17 9 24", "12F", "False", "crawford")
 #taking the input for the student
 student = input("what is the student's name?")
-student = Student(student, input("\n What is the student's house?", ))
+student = Student(student, input("\n What is the student's house?"), input("\n What is the student's last grade?"), input("\n What is the student's preferred name?"), )
 print(andy.prefername)
 
 #Allows the user to input their desired query, for example a search for users. do input sanitation later.
